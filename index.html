@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoveWithMii - Fitness Motivation Through Smart App Blocking</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1c;
+            background: linear-gradient(135deg, #f7f8fa 0%, #e8f6f3 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #33abdc, #4dd964, #f2b817);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #33abdc, #4dd964, #f2b817);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #1a1a1c, #4a4a4c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero .subtitle {
+            font-size: 1.4rem;
+            color: #6a6a6c;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #33abdc, #4dd964, #f2b817);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        /* Features Grid */
+        .features {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            color: #1a1a1c;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 36px;
+            color: white;
+            background: linear-gradient(135deg, #33abdc, #4dd964);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1a1a1c;
+        }
+
+        .feature-card p {
+            color: #6a6a6c;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            padding: 80px 0;
+            border-radius: 32px;
+            margin: 40px 0;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #33abdc, #4dd964);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+
+        .step h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1a1a1c;
+        }
+
+        .step p {
+            color: #6a6a6c;
+            font-size: 0.95rem;
+        }
+
+        /* Privacy Section */
+        .privacy {
+            background: linear-gradient(135deg, #1a1a1c, #2a2a2c);
+            color: white;
+            padding: 80px 0;
+            border-radius: 32px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .privacy h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .privacy .highlight {
+            background: linear-gradient(135deg, #33abdc, #4dd964);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .privacy-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .privacy-item {
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        .privacy-item h4 {
+            margin-bottom: 12px;
+            color: #4dd964;
+        }
+
+        /* Developer Section */
+        .developer {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .dev-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 60px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .dev-card h2 {
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .dev-card p {
+            color: #6a6a6c;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #f7f8fa, #e8f6f3);
+            padding: 30px;
+            border-radius: 16px;
+            margin-top: 30px;
+        }
+
+        .contact-info strong {
+            color: #1a1a1c;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1c;
+            color: white;
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+
+        .footer-content {
+            margin-bottom: 30px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #4dd964;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #33abdc;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .logo-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="container">
+                <div class="logo">
+                    <div class="logo-icon">🚶‍♂️</div>
+                    <span>MoveWithMii</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Move More, <span class="hero-gradient">Phone Less</span></h1>
+            <p class="subtitle">The first fitness app that blocks your distracting apps until you reach your daily step goal. Transform screen time into active time.</p>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why MoveWithMii is Different</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Self-Controlled Motivation</h3>
+                    <p>Users voluntarily select apps to block, creating personal accountability for their fitness goals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Smart App Blocking</h3>
+                    <p>Uses Apple's Family Controls framework to temporarily restrict selected apps until step goals are achieved.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏃‍♂️</div>
+                    <h3>HealthKit Integration</h3>
+                    <p>Seamlessly reads step data from iOS Health app to track progress toward daily goals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔓</div>
+                    <h3>Automatic Unlocking</h3>
+                    <p>Apps unlock automatically when fitness goals are reached, rewarding healthy behavior.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Privacy First</h3>
+                    <p>Zero data collection. All information stays on the user's device, ensuring complete privacy.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Daily Reset</h3>
+                    <p>Goals and restrictions reset daily, providing fresh motivation and sustainable habit building.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h4>Set Your Goal</h4>
+                    <p>Choose a daily step goal that matches your fitness level and lifestyle.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h4>Select Apps to Block</h4>
+                    <p>Voluntarily choose which apps you want blocked until you reach your goal (social media, games, etc.).</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h4>Get Moving</h4>
+                    <p>Start walking! Your selected apps remain inaccessible until you hit your step target.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h4>Unlock & Celebrate</h4>
+                    <p>When you reach your goal, apps unlock automatically and you receive a success notification.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy -->
+    <section class="privacy">
+        <div class="container">
+            <h2><span class="highlight">Zero Data Collection</span></h2>
+            <p style="font-size: 1.2rem; margin-bottom: 40px;">Your privacy is our priority. MoveWithMii collects absolutely no personal data.</p>
+            
+            <div class="privacy-features">
+                <div class="privacy-item">
+                    <h4>🏠 Local Storage Only</h4>
+                    <p>All data stays on your device using iOS secure storage.</p>
+                </div>
+                <div class="privacy-item">
+                    <h4>🚫 No Tracking</h4>
+                    <p>No analytics, no third-party services, no user tracking.</p>
+                </div>
+                <div class="privacy-item">
+                    <h4>🔐 HealthKit Standard</h4>
+                    <p>Uses Apple's secure HealthKit framework for step data.</p>
+                </div>
+                <div class="privacy-item">
+                    <h4>👤 User Control</h4>
+                    <p>Complete control over all app restrictions and permissions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Developer -->
+    <section class="developer">
+        <div class="container">
+            <div class="dev-card">
+                <h2>About the Developer</h2>
+                <p>MoveWithMii is developed by Ruben Granet, a passionate iOS developer focused on creating apps that promote health and digital wellness.</p>
+                <p>This app represents a unique approach to fitness motivation by combining behavioral psychology with technology to encourage healthier habits.</p>
+                
+                <div class="contact-info">
+                    <p><strong>Developer:</strong> Ruben Granet</p>
+                    <p><strong>Bundle ID:</strong> com.withmii.movewithmii</p>
+                    <p><strong>Contact:</strong> support@movewithmii.com</p>
+                    <p><strong>Apple Developer Program:</strong> Active Member</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo" style="justify-content: center; margin-bottom: 20px;">
+                    <div class="logo-icon">🚶‍♂️</div>
+                    <span>MoveWithMii</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#support">Support</a>
+                    <a href="mailto:support@movewithmii.com">Contact</a>
+                </div>
+                <p style="color: #6a6a6c; font-size: 0.9rem;">
+                    © 2025 Ruben Granet. Promoting health through smart technology.
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
