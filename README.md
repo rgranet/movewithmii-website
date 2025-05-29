@@ -106,7 +106,7 @@ The website is automatically deployed via GitHub Pages:
 
 ### Developer Information
 - **Name**: Ruben Granet
-- **Email**: support@movewithmii.com
+- **Email**: support@withmii.com
 - **Response Time**: 24-48 hours
 
 ### Links
